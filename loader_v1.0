@@ -1,0 +1,47 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int main() {
+	int i,j,k;
+    char portcom[100];
+    char cli_RX[100];
+    char cli_TX[100];
+    char com_num[100];
+    char com_num2[100];
+    char com_num3[100];
+    char part_comando[100];
+    char cli_RX_final[100];
+    
+    for (i=0; i<=10; i++)
+    {
+	    itoa(i,com_num, 10);
+	    strcpy( portcom, "mode com" );
+		strncat(portcom, com_num, 30);
+		strcpy( part_comando, " baud=57600 parity=n data=8 stop=1 to=off xon=on");
+	    strncat(portcom, part_comando, 100);
+	 // EXECUTANDO O COMANDO
+	    system(portcom);
+    }
+    line:
+    // CONFIGURANDO RECEPÇAO
+    for (j=0; j<=10; j++)
+    {
+	    itoa(j,com_num2, 10);
+	    strcpy( cli_RX, "cmd < \\\\.\\com" );
+		strncat(cli_RX, com_num2, 30);
+		strcpy( cli_RX_final, " > log.txt");
+	    strncat(cli_RX, cli_RX_final, 100);
+	    system(cli_RX); // RX
+    }
+    // CONFIGURANDO TRANSMISSAO
+    for (k=0; k<=10; k++)
+    {
+	    itoa(k,com_num3, 10);
+	    strcpy( cli_TX, "type log.txt >> \\\\.\\com" );
+		strncat(cli_TX, com_num3, 30);
+	    system(cli_TX); // TX
+    }
+    goto line;
+	return 0;
+}
