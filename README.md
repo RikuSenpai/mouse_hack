@@ -6,6 +6,9 @@ this project is a hack mouse to own windows machine, using microcontrolers devic
 Devices embeded on realmouse.
 
 esp8266 v1
+
 TTL USB-TO-SERIAL CH340
+
 Arduino Promicro
+
 tiny USB HUB
